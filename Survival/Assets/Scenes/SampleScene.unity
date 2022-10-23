@@ -371,6 +371,10 @@ PrefabInstance:
       propertyPath: moveSpeed
       value: 2.5
       objectReference: {fileID: 0}
+    - target: {fileID: 7373024602543068661, guid: 9fde224113c4f7c8698c7ea2942220e6, type: 3}
+      propertyPath: senseDistance
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 8997598177041694386, guid: 9fde224113c4f7c8698c7ea2942220e6, type: 3}
       propertyPath: m_Name
       value: Zombie
