@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
+public class ZombieMovement : MonoBehaviour
 {
     private Rigidbody2D rb;
     private BoxCollider2D coll;
@@ -12,8 +12,9 @@ public class PlayerMovement : MonoBehaviour
     private float dirX = 0f;
     private float dirY = 0f;
 
-    [SerializeField]
-    private float moveSpeed = 5f;
+    [SerializeField] private Transform target;
+    [SerializeField] private float moveSpeed = 2.5f;
+    [SerializeField] private float senseDistance = 10f;
 
     private enum MovementState
     {
@@ -30,13 +31,11 @@ public class PlayerMovement : MonoBehaviour
     }
 
     // Update is called once per frame
-    private void Update()
+    private void FixedUpdate()
     {
-        dirX = Input.GetAxisRaw("Horizontal");
-        rb.velocity = new Vector2(dirX * moveSpeed, rb.velocity.y);
-
-        dirY = Input.GetAxisRaw("Vertical");
-        rb.velocity = new Vector2(rb.velocity.x, dirY * moveSpeed);
+        rb.transform.position = Vector2.MoveTowards(rb.transform.position, target.transform.position, moveSpeed * Time.deltaTime);
+        // Set velocity to 0 in order to avoid player pushing the zombie
+        rb.velocity = new Vector2(0,0);
 
         UpdateAnimationState();
     }
