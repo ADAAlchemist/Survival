@@ -169,4 +169,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   moveSpeed: 5
-  senseDistance: 10
+  senseDistance: 5

@@ -14,7 +14,7 @@ public class ZombieMovement : MonoBehaviour
 
     [SerializeField] private Transform target;
     [SerializeField] private float moveSpeed = 2.5f;
-    [SerializeField] private float senseDistance = 10f;
+    [SerializeField] private float senseDistance = 5f;
 
     private enum MovementState
     {
@@ -33,9 +33,18 @@ public class ZombieMovement : MonoBehaviour
     // Update is called once per frame
     private void FixedUpdate()
     {
-        rb.transform.position = Vector2.MoveTowards(rb.transform.position, target.transform.position, moveSpeed * Time.deltaTime);
+        if (Vector2.Distance(transform.position, target.transform.position) < senseDistance)
+        {
+            rb.transform.position = Vector2.MoveTowards(rb.transform.position, target.transform.position, moveSpeed * Time.deltaTime);
+            dirX = 1;
+        }
+        else
+        {
+            dirX = 0f;
+        }
+
         // Set velocity to 0 in order to avoid player pushing the zombie
-        rb.velocity = new Vector2(0,0);
+        rb.velocity = new Vector2(0, 0);
 
         UpdateAnimationState();
     }
